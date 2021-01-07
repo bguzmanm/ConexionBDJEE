@@ -33,10 +33,12 @@ public class ClienteDAO implements IClienteDAO {
 		
 		
 	}
+	
+	
+	
 
 	@Override
 	public List<Cliente> readAll() {
-		
 		List<Cliente> lista = new ArrayList<Cliente>();
 		
 		try {
@@ -113,6 +115,43 @@ public class ClienteDAO implements IClienteDAO {
 			System.out.println("Error en método updateCliente");
 			e.printStackTrace();
 		}
+		
+		
+	}
+
+
+
+
+	@Override
+	public Cliente readOne(int id) {
+		
+		Cliente cli = null;
+		
+		try {
+			
+			//establecemos conexión con objeto Singleton
+			Connection c = Conexion.getConnection();
+			//
+			Statement s = c.createStatement();
+			String sql = "select customer_id, name, address, website, credit_limit from customers where customer_id=" + id;
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				//creo una instancia de cliente, le paso los datos del resultset, y lo agrego a la lista.
+				cli = new Cliente(rs.getInt("customer_id"), rs.getString("name"), rs.getString("address"), rs.getString("website"), rs.getDouble("credit_limit"));
+			}
+			
+			//s.close();
+			//rs.close();
+			//c.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Error en método readAll");
+			e.printStackTrace();
+		}
+		
+		return cli;
 		
 		
 	}

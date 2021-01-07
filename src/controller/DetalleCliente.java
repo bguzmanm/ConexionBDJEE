@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,19 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.ClienteDAO;
 
-
-
 /**
- * Servlet implementation class PruebaConexion
+ * Servlet implementation class DetalleCliente
  */
-@WebServlet("/PruebaConexion")
-public class PruebaConexion extends HttpServlet {
+@WebServlet("/DetalleCliente")
+public class DetalleCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PruebaConexion() {
+    public DetalleCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,12 +29,16 @@ public class PruebaConexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		ClienteDAO cliDao = new ClienteDAO();		
-		List<Cliente> lista = cliDao.readAll();		
-		request.setAttribute("clientes", lista);		
-		getServletContext().getRequestDispatcher("/views/clientes.jsp").forward(request, response);		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		ClienteDAO cDao = new ClienteDAO();
+		Cliente c = cDao.readOne(id);
+		
+		request.setAttribute("cliente", c);
+		getServletContext().getRequestDispatcher("/views/cliente.jsp").forward(request, response);		
+				
+		
 	}
 
 	/**

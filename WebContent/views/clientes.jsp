@@ -22,17 +22,16 @@
 					<th scope="col">Id</th>
 					<th scope="col">Nombre</th>
 					<th scope="col">Dirección</th>
-					<th scope="col">Website</th>
-					<th scope="col">Crédito</th>
+					
+					<th scope="col">Acción</th>
 			</thead>
 			<tbody>
 				<c:forEach var="c" items="${clientes}">
 					<tr>
-						<td><c:out value="${c.getId()}"></c:out></td>
+						<td><a href="d/?id=${c.getId()}"><c:out value="${c.getId()}"></c:out></a></td>
 						<td><c:out value="${c.getNombre()}"></c:out></td>
 						<td><c:out value="${c.getDireccion()}"></c:out></td>
-						<td><c:out value="${c.getWebsite()}"></c:out></td>
-						<td><c:out value="${c.getCredito()}"></c:out></td>
+						<td>Editar | Borrar</td>
 					</tr>
 				</c:forEach>
 			</tbody>

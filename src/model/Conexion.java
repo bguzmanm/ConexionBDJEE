@@ -24,7 +24,6 @@ public class Conexion {
 	public static Connection getConnection() {
 		if (con == null) {
 			new Conexion();
-			
 		}
 		
 		return con;
